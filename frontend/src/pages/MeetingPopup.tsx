@@ -119,7 +119,7 @@ export default function MeetingPopup() {
       if (mediaRecorderRef.current && isRecording) {
         mediaRecorderRef.current.onstop = async () => {
           recognitionRef.current?.stop()
-          const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' })
+
           setLoading(true)
           try {
             // Send JSON so duration stays a number (FormData always converts to string)
