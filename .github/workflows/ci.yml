@@ -1,0 +1,23 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install backend deps
+        run: |
+          cd backend
+          npm ci
+      - name: Lint
+        run: |
+          cd backend
+          npx eslint "src/**/*.ts" || true
+      - name: Run tests
+        run: |
+          cd backend
+          npm test
